@@ -19,7 +19,7 @@ _Attention conservation notice:_ a few hundred words on something that could hav
 Very recently, this image appeared on my Linkedin feed, posted by a former colleague of mine (the caption is
 taken from the file name).
 
-![Temperature change and carbon dioxide change measured from the EPICA Dome C ice core in Antarctica](/img/Temperature-change-and-carbon-dioxide-change-measured-from-the-EPICA-Dome-C-ice-core-in-Antarctica-v2.jpg)
+![Temperature change and carbon dioxide change measured from the EPICA Dome C ice core in Antarctica](../../assets/Temperature-change-and-carbon-dioxide-change-measured-from-the-EPICA-Dome-C-ice-core-in-Antarctica-v2.jpg)
 
 With just a few words to accompany it, the point being that one has to look at the right time scale to
 gain perspective, the interpretation was left to the reader.

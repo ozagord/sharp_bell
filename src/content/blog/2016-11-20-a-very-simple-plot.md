@@ -6,16 +6,13 @@ tags: ["dataviz"]
 date: "2016-11-20"
 headerimg: "/img/alps.jpg"
 ---
-
-```r
-knitr::opts_chunk$set(echo = TRUE)
-```
 If you look at the front cover of _The Visual Display of Quantitative Information_,
 one of the famous books by Eduard Tufte, you will see a plot made of many
 lines. An intricate network of red lines of different thickness,
 cutting diagonally a regular grey grid.
 
-![VDQI bookcover](/img/vdqi_bookcover.png)
+
+![VDQI bookcover](../../assets/vdqi_bookcover.png)
 
 
 The plot is one of the examples of the first chapter, _Graphical Excellence_,
@@ -28,7 +25,7 @@ entire trip but the TGV, first introduced in 1981, completes the trip in less
 than three hours. A red line overlayed on the schedule of 100 years before
 marks the progress made.
 
-![Marey](/img/marey_tgv.jpg)
+![Marey](../../assets/marey_tgv.jpg)
 
 
 I like these plots because of their simplicity: position vs. time; something I
@@ -54,7 +51,7 @@ base tunnel, they are shown in the plot below. It might not look that impressive
 compared to the TGV. But if you look at the mountains while approaching them
 from the plain, it's a different feeling.
 
-![Trains schedule Zurich-Milano](/img/gotthard_trains.svg)
+![Trains schedule Zurich-Milano](<../../assets/gotthard_trains.svg>)
 
 
 [Nine people died](https://www.alptransit.ch/en/media/press-releases/detail/article/memorial-ceremony-for-deceased-tunnel-workers/)
@@ -62,9 +59,9 @@ during construction of the Gotthard Base Tunnel. None of them was of Swiss natio
 
 Below is the R code used to produce the schedule plot. The timetable for a few train
 was obtained on the SBB [website](http://www.sbb.ch) and manually written into
-a [csv file](https://github.com/ozagordi/ozagordi.github.io/blob/gh-pages/_source/train_gotthard/timetable-table.csv).
+a [csv file](/train_gotthard/timetable-table.csv).
 The coordinates of the cities were taken on Google Maps and saved
-[here](https://github.com/ozagordi/ozagordi.github.io/blob/gh-pages/_source/train_gotthard/coordinates-table.csv).
+[here](/train_gotthard/coordinates-table.csv).
 
 ```r
 library(tidyverse)

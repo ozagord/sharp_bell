@@ -44,7 +44,7 @@ taking place in the lab. Thus, it is easily interpretable.
 
 It was great, but it took quite some time.
 
-![A generative model](/img/model.png)
+![A generative model](../../assets/model.png)
 
 But do you always need such a model? According to [some](http://r4ds.had.co.nz/model-intro.html),
 <q>the goal of a model is to provide a simple low-dimensional summary of a dataset</q>,
@@ -52,7 +52,7 @@ and I would stretch this to say that even a simple data visualisation can be con
 
 For example, in this more recent project I relied heavily on some heuristic
 tools to denoise my data, match them by similarity and obtain summary statistics.
-Advantages of these heruristic tools: they are fast,
+Advantages of these heuristic tools: they are fast,
 thoroughly tested by a whole community of researchers, and I could easily use them.
 I did not have to struggle to write efficient code from scratch.
 On the other hand, I do not have many parameters that I could directly link to

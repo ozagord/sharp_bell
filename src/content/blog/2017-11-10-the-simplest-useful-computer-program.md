@@ -122,7 +122,6 @@ and anyone who has used them least once will recognize their distinctive feature
 they are at the same time an environment and a programming language able to perform
 even the most complex operation. This makes them so powerful (and dangerous) that inspired some
 to draw an analogy between Unix and
-[chainsaws](http://www.vincebuffalo.com/blog/2013/08/08/using-names-pipes-and-process-substitution-in-bioinformatics.html).
-
+[chainsaws](https://vincebuffalo.com/blog/using-named-pipes-and-process-substitution-in-bioinformatics/).
 
 _Corrado Böhm, aged 94, died last 23 October._

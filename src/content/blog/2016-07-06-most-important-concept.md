@@ -27,8 +27,8 @@ mathematical background. I've always done my best to explain things
 from my side, and I've always been irritated by scientists who try to
 impress/humiliate others with some "theorem dropping".
 
-
-
+![Function](../../assets/function_plot.png)
+<!---
 ```r
 library(ggplot2)
 library(ggthemr)
@@ -45,9 +45,8 @@ p <- ggplot(df, aes(x, y)) + geom_line() +
         axis.text.x = element_text(size=14),
         axis.text.y = element_text(size=14))
 print(p)
-
 ```
-
+-->
 So, if you had to choose one single concept that a person absolutely needs to
 grasp before endeavouring in data analysis, what should this concept be?
 

@@ -71,7 +71,37 @@ In other words, for any number of tests (at least, between five and thirty)
 _my_ estimate (violet points) matches the upper limit of the 90% confidence
 interval computed with the Clopper-Pearson method (magenta line).
 
-![Confidence intervals](/img/all_negatives_theta.png)
+![Confidence intervals](../../assets/all_negatives_theta.png)
+
+<!---
+```{r}
+library(ggplot2)
+library(ggthemr)
+ggthemr('solarized', type='outer')
+
+# computing 90% confidence interval with "exact" meaning Clopper-Pearson
+library(binom)
+cis <- binom.confint(0, 5:30, conf.level = 0.9, methods="exact")
+
+# max theta for which n all negative outcomes have probability 5%
+p_all_neg <- 1-0.05**(1./5:30)
+
+df <- data.frame(x=5:30, y1=cis$upper, y2=p_all_neg)
+p <- ggplot(df, aes(x)) +
+  geom_line(y = df$y1, show.legend = TRUE, colour='#d33682') +
+  geom_point(y = df$y2, show.legend = TRUE, colour='#6c71c4') +
+  xlab("trials") +
+  ylab(expression(theta)) +
+  ylim(0.0, 0.5) +
+  theme(axis.title.x = element_text(face="bold", size=18),
+        axis.text.x  = element_text(angle=0, vjust=0.0, size=14),
+        axis.title.y = element_text(face="bold", size=18),
+        axis.text.y  = element_text(angle=0, vjust=0.0, size=14))
+print(p)
+```
+-->
+
+
 
 ## Finding confidence intervals
 

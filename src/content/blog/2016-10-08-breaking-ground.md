@@ -11,9 +11,6 @@ thumbnailImagePosition: bottom
 customjs:
   - https://d3js.org/d3.v3.js
 ---
-```r
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 Most of our daily experiences, be it writing a blog post on a laptop or slicing
 bread with a knife, build on the enormous amount of knowledge and progress
