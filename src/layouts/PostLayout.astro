@@ -1,0 +1,118 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { title, date, author, tags, coverImage, headerimg } = post.data;
+
+// Use either coverImage or headerimg
+const heroImage = coverImage || headerimg || '/img/alps.jpg';
+
+// Format date
+const formattedDate = new Date(date).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={title} image={heroImage}>
+  <article class="post">
+    <div class="hero-image" style={`background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${heroImage}')`}>
+      <div class="container hero-content animate-fade-in">
+        <h1 class="post-title">{title}</h1>
+        <div class="post-meta">
+          <span class="author">By {author}</span>
+          <span class="separator">&bull;</span>
+          <time datetime={date.toISOString()}>{formattedDate}</time>
+        </div>
+        {tags && tags.length > 0 && (
+          <div class="tags">
+            {tags.map((tag: string) => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+    
+    <div class="container post-container">
+      <div class="post-content">
+        <slot />
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .hero-image {
+    height: 60vh;
+    min-height: 400px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .hero-content {
+    color: white;
+  }
+
+  .post-title {
+    color: white;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    margin-top: 0;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  }
+
+  .post-meta {
+    font-size: 1.1rem;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+
+  .separator {
+    margin: 0 0.5rem;
+  }
+
+  .tags {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 0.2rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    backdrop-filter: blur(4px);
+  }
+
+  .post-container {
+    max-width: 700px;
+  }
+
+  @media (max-width: 768px) {
+    .post-title {
+      font-size: 2rem;
+    }
+    
+    .hero-image {
+      height: 40vh;
+      min-height: 300px;
+    }
+  }
+</style>

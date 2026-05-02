@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Abel&family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;800&display=swap');
+
+:root {
+  /* Solarized Light Palette */
+  --bg-color: #fdf6e3;
+  --bg-alt: #eee8d5;
+  --text-main: #657b83;
+  --text-light: #93a1a1;
+  --heading-color: #268bd2;
+  --accent-color: #0085a1;
+  --border-color: #e5e5e5;
+
+  --font-body: 'Abel', 'Helvetica Neue', sans-serif;
+  --font-heading: 'Abel', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-title: 'Montserrat', sans-serif;
+  --font-ui: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.6;
+  font-size: 22px;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  color: var(--heading-color);
+  font-weight: 800;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  line-height: 1.2;
+}
+
+h1 {
+  font-family: var(--font-title);
+  font-size: 2.5rem;
+  color: var(--heading-color);
+}
+
+p {
+  margin-bottom: 1.5em;
+  font-weight: 300;
+}
+
+a {
+  color: var(--heading-color);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+a:hover {
+  color: var(--accent-color);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: var(--shadow-md);
+  margin: 2rem 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Post specific styles */
+.post-content {
+  font-size: 1.1rem;
+}
+
+.post-content a {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
+}
+
+.post-content a:hover {
+  background-color: rgba(38, 139, 210, 0.1);
+}
+
+.post-content blockquote {
+  border-left: 4px solid var(--heading-color);
+  padding-left: 1rem;
+  font-style: italic;
+  color: var(--text-light);
+  margin: 1.5rem 0;
+  background: var(--bg-alt);
+  padding: 1rem;
+  border-radius: 0 8px 8px 0;
+}
+
+.post-content code {
+  background-color: var(--bg-alt);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-size: 0.9em;
+  font-family: monospace;
+}
+
+.post-content pre {
+  background-color: #282c34 !important;
+  color: #abb2bf;
+  padding: 1.5rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.post-content pre code {
+  background-color: transparent;
+  padding: 0;
+  color: inherit;
+}
+
+/* Utilities */
+.btn {
+  display: inline-block;
+  font-family: var(--font-ui);
+  padding: 0.8rem 1.5rem;
+  background-color: var(--heading-color);
+  color: white;
+  border-radius: 30px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+}
+
+.btn:hover {
+  background-color: var(--accent-color);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}

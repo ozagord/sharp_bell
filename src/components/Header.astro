@@ -1,0 +1,79 @@
+---
+---
+<header class="site-header">
+  <div class="container header-container">
+    <a href="/" class="logo">Sharp Bell</a>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    background-color: var(--bg-alt);
+    padding: 1.5rem 0;
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: var(--transition);
+  }
+
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    font-family: var(--font-ui);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--heading-color);
+    letter-spacing: 1px;
+  }
+
+  .logo:hover {
+    color: var(--accent-color);
+  }
+
+  .main-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+  }
+
+  .main-nav a {
+    font-family: var(--font-ui);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    color: var(--text-main);
+    padding: 0.5rem 0;
+    position: relative;
+  }
+
+  .main-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--accent-color);
+    transition: var(--transition);
+  }
+
+  .main-nav a:hover {
+    color: var(--accent-color);
+  }
+
+  .main-nav a:hover::after {
+    width: 100%;
+  }
+</style>

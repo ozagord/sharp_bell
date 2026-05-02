@@ -1,0 +1,65 @@
+---
+title: "The most important concept"
+author: "Osvaldo"
+date: 2016-07-06T21:13:14-05:00
+categories: ["science"]
+tags: ["fundamentals", "mathematics"]
+headerimg: "/img/mountain.jpg"
+metaAlignment: center
+---
+
+If we had to choose a single statement to pass to generations after an
+imaginary destruction of the whole scientific knowledge, what would you choose?
+Which idea would help the subsequent generations the most in recreating the
+lost body of knowledge and, ultimately, the civilization? Richard Feynman once
+stated that it is the atomic hypothesis,
+
+<blockquote>
+that all things are made of atoms—little particles that move around in perpetual
+motion, attracting each other when they are a little distance apart, but
+repelling upon being squeezed into one another.
+</blockquote>
+
+This struck me again a few days ago when a new coworker started here and I was
+asked to introduce her to (loosely speaking) data analysis and computation.
+Since years now, I've been working mainly with people without a strong
+mathematical background. I've always done my best to explain things
+from my side, and I've always been irritated by scientists who try to
+impress/humiliate others with some "theorem dropping".
+
+
+
+```r
+library(ggplot2)
+library(ggthemr)
+ggthemr('solarized', type='outer')
+
+x=seq(-3, 3, by = 0.05)
+y=(exp(x) - exp(-x)) / (exp(x) + exp(-x))
+df <- data.frame(x=x, y=y)
+
+p <- ggplot(df, aes(x, y)) + geom_line() +
+  theme(axis.title.x=element_blank(),
+        axis.title.y=element_blank(),
+        legend.position="none",
+        axis.text.x = element_text(size=14),
+        axis.text.y = element_text(size=14))
+print(p)
+
+```
+
+So, if you had to choose one single concept that a person absolutely needs to
+grasp before endeavouring in data analysis, what should this concept be?
+
+This is a very different question from the one Feynman answered. I am now asking
+what is the concept that is absolutely needed to understand methods and results
+in data analysis **explained by someone who knows it**, not the single notion
+that would help the most a new civilization rebuilding science from scratch.
+
+I cannot imagine a more pervasive and fundamental concept than that of function
+in mathematics. From plotting any kind of results, to writing even the simplest
+program, anything is hard or impossible to understand without this type of
+abstraction.
+
+
+_Header image from [Flickr](https://flic.kr/p/ecpHBw)_
