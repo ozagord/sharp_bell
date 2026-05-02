@@ -165,9 +165,11 @@ with the Clopper-Pearson at 90%. In fact, since we are in the special case of
 $T=0$, we can write the Clopper-Pearson as
 
 $$
+\begin{aligned}
 \{\theta : p(\mathrm{Bin}(n, \theta) \leq 0) > \frac{\alpha}{2} \} \cap
-\{\theta : p(\mathrm{Bin}(n, \theta) \geq 0) > \frac{\alpha}{2} \} =
+\{\theta : p(\mathrm{Bin}(n, \theta) \geq 0) > \frac{\alpha}{2} \} = \\
 \{\theta : p(\mathrm{Bin}(n, \theta) = 0) > \frac{\alpha}{2} \}.
+\end{aligned}
 $$
 
 By taking $\alpha = 0.10$ in the Clopper-Pearson estimate, we have the formula
