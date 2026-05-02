@@ -17,8 +17,10 @@ $n$ observations that can be $0$ or $1$. Each observation has a probability
 $\theta$ of being positive. In formulas
 
 $$
+\begin{aligned}
 x_i \in \{0, 1\} \quad \forall i = 1, \ldots , n \\
 p(x_i=1) = \theta .
+\end{aligned}
 $$
 
 We know that the number of successes is binomially distributed, thus a
@@ -43,8 +45,10 @@ $$
 which gives, solving for $\theta$,
 
 $$
+\begin{aligned}
 \theta_u = 1 - \alpha^{1/n} \\
 \theta_u(n=23) = 12.2\% .
+\end{aligned}
 $$
 
 In other words, what I did was to compute the highest $\theta$ for which I
@@ -67,31 +71,7 @@ In other words, for any number of tests (at least, between five and thirty)
 _my_ estimate (violet points) matches the upper limit of the 90% confidence
 interval computed with the Clopper-Pearson method (magenta line).
 
-```r
-library(ggplot2)
-library(ggthemr)
-ggthemr('solarized', type='outer')
-
-# computing 90% confidence interval with "exact" meaning Clopper-Pearson
-library(binom)
-cis <- binom.confint(0, 5:30, conf.level = 0.9, methods="exact")
-
-# max theta for which n all negative outcomes have probability 5%
-p_all_neg <- 1-0.05**(1./5:30)
-
-df <- data.frame(x=5:30, y1=cis$upper, y2=p_all_neg)
-p <- ggplot(df, aes(x)) +
-  geom_line(y = df$y1, show.legend = TRUE, colour='#d33682') +
-  geom_point(y = df$y2, show.legend = TRUE, colour='#6c71c4') +
-  xlab("trials") +
-  ylab(expression(theta)) +
-  ylim(0.0, 0.5) +
-  theme(axis.title.x = element_text(face="bold", size=18),
-        axis.text.x  = element_text(angle=0, vjust=0.0, size=14),
-        axis.title.y = element_text(face="bold", size=18),
-        axis.text.y  = element_text(angle=0, vjust=0.0, size=14))
-print(p)
-```
+![Confidence intervals](/img/all_negatives_theta.png)
 
 ## Finding confidence intervals
 

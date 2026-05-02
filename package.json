@@ -12,7 +12,9 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^6.2.1"
+    "astro": "^6.2.1",
+    "rehype-mathjax": "^7.1.0",
+    "remark-math": "^6.0.0"
   },
   "devDependencies": {
     "sass": "^1.99.0"
