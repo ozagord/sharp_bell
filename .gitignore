@@ -1,0 +1,8 @@
+themes/hugo-tranquilpeak-theme/node_modules
+.Rhistory
+.Rproj.user/
+public/
+.Rproj.user
+node_modules
+themes/tranquilpeak/package-lock.json
+static/tables/

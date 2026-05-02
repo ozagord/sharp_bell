@@ -1,0 +1,43 @@
+baseurl = "https://ozagordi.rbind.io/"
+languageCode = "en-us"
+title = "Sharp bell"
+theme = "antelope"
+disqusShortname = ""
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+preserveTaxonomyNames = true
+footnotereturnlinkcontents = "↩"
+
+[author]
+    name = "Osvaldo Zagordi"
+
+[params]
+    description = "Sharp bell: personal blog of Osvaldo Zagordi, physicist by background. Data science, statistics, science, machine learning, python, R and so on."
+    twitter = "ozagordi"
+    linkedin = "osvaldozagordi"
+    github = "ozagordi"
+    instagram = "osvaldo.zagordi"
+    googleAnalytics = "UA-80133486-1"
+
+[permalinks]
+    post = "/post/:year/:month/:day/:slug/"
+    note = "/note/:year/:month/:day/:slug/"
+
+[[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+[[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 2
+[[menu.main]]
+    name = "Categories"
+    url = "/categories/"
+    weight = 3
+[[menu.main]]
+    name = "Tags"
+    url = "/tags/"
+    weight = 4
+[[menu.main]]
+    name = "Subscribe"
+    url = "/index.xml"

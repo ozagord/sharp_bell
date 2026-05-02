@@ -1,0 +1,113 @@
+---
+title: Which country spends best on healthcare?
+author: Osvaldo
+date: '2018-01-21'
+headerimg: "/img/surfers_light_blur.jpg"
+slug: which-country-spends-best-on-healthcare
+categories:
+  - data
+tags:
+  - OECD
+  - country statistics
+  - healthcare
+---
+
+In its publication [Health at a Glance 2017](http://dx.doi.org/10.1787/health_glance-2017-en), the most famous
+rich countries think-tank (OECD) presents a trove of data
+on health status and health system performance from many countries. Here below I report a small analysis I did looking at
+life expectancy and health spending per capita. The analysis below is performed on data available [here](http://www.oecd-ilibrary.org/social-issues-migration-health/health-at-a-glance-2017/life-expectancy-at-birth-and-health-spending-per-capita-2015-or-nearest-year_health_glance-2017-graph8-en), including the 35 OECD members plus some non-members like India, Indonesia, China, Costa Rica, Russia and others.
+
+```{r all_observed, echo=FALSE, message=FALSE, warning=FALSE}
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(plotly)
+library(widgetframe)
+life_exp_spending <- read_csv("life_exp_spending.csv") %>%
+  arrange(health_spending_USD_ppp)
+# kable(life_exp_spending, caption = 'Health spending and life expectancy at birth, 2015 (or nearest year)')
+
+p <- plot_ly(life_exp_spending, x = ~health_spending_USD_ppp, y = ~life_expectancy, type = 'scatter',
+        mode = 'markers', text = ~country) %>%
+        # textposition = 'middle right', textfont = list(color = '#000000', size = 16)) %>%
+  layout(title = 'Health spending per capita and life expectancy at birth, 2015 (or nearest year)',
+         xaxis = list(title = 'Health spending per capita (USD at PPP)',
+                      zeroline = FALSE),
+         yaxis = list(title = 'Life expectancy at birth (years)'))
+
+frameWidget(p)
+```
+
+USA are known to spend the most amont the OECD countries. Nevertheless, despite spending 9507 USD per capita, their life
+expectancy is not in the top-tier and achieves 78.8 years. Further, it has been going down since a couple of years as
+a conseguence of the [opioid crisis](https://www.theguardian.com/us-news/2017/dec/21/us-life-expectancy-down-for-second-year-in-a-row-amid-opioid-crisis). Another outlier is South Africa, whose spending is in the low range of the pack, but achieves
+the lowest life expectancy in the countries considered (among other factors, HIV prevalence among adults in
+South Africa is around 19%).
+
+Except for these notable outliers, there seems to be a clear correlation between spending and life expectancy, with the latter
+increasing until 3000-4000 dollars and then flattening at around 83 years. Something that could be captured with a reasonable
+goodness-of-fit by an exponential response as in the next plot (USA and South Africa have been removed).
+
+```{r predicted, echo=FALSE, message=FALSE, warning=FALSE}
+life_exp_spending <- life_exp_spending %>%
+  filter(!(country_code %in% c('USA', 'ZAF')))
+
+fit <- nls(life_expectancy ~ le_max * (1 - exp(a - b * health_spending_USD_ppp)),
+           data = life_exp_spending,
+           start = list(le_max = 80, a = 10, b = 0.001))
+# summary(fit)
+# plot(life_exp_spending$health_spending_USD_ppp, life_exp_spending$life_expectancy)
+# lines(life_exp_spending$health_spending_USD_ppp, predict(fit))
+life_exp_spending$fit <- predict(fit)
+life_exp_spending$residuals <- round(residuals(fit), 1)
+
+p <- plot_ly(life_exp_spending, x = ~health_spending_USD_ppp, y = ~life_expectancy, type = 'scatter',
+             mode = 'markers', text = ~country, name = 'observed') %>%
+  add_trace(y = ~fit, name = 'predicted', mode = 'lines') %>%
+  layout(title = 'Health spending per capita and life expectancy at birth, 2015 (or nearest year)',
+         xaxis = list(title = 'Health spending per capita (USD at PPP)',
+                      zeroline = FALSE),
+         yaxis = list(title = 'Life expectancy at birth (years)'))
+
+
+# life_exp_spending <- life_exp_spending %>%
+#   arrange(desc(residuals))
+frameWidget(p)
+```
+
+This brings us to the final plot, which shows the over- and under-performers: which country, given its spending, achieves
+life expectancy above and below the _predicted_ one?
+
+```{r residuals, echo=FALSE, message=FALSE, warning=FALSE}
+
+life_exp_spending <- life_exp_spending %>%
+  arrange(desc(residuals))
+life_exp_spending$country_code <- factor(life_exp_spending$country_code, levels = life_exp_spending$country_code)
+p <- plot_ly(life_exp_spending, x = ~country_code, y = ~residuals, type="bar", text=life_exp_spending$country) %>%
+    layout(title = 'Residual (observed - predicted) life expectancy',
+         xaxis = list(title=''),
+         yaxis = list(title = 'Excess life expectancy (years)'))
+
+frameWidget(p)
+```
+
+In this special ranking, the worst performers are Russia, Lithuania, Hungary, Slovakia, and Latvia; with spendings between 1351
+and 2059 USD, they fare between 2 and five years worse than predicted. Interestingly, they are trailed by Germany, Denmark,
+and Belgium; with spendings between 4778 and  5353 USD, they are 1-1.5 years below predictions.
+Turkey, China, and Costa Rica, although occupying the low-spending positions and, at the same time, not featuring the highest
+life expectancy, do much better than the prediction and are the winners in this special ranking. A group of countries with the
+highest life expectancy and with moderate spending is represented by Japan (the highest life expectancy overall), Spain, Italy, Israel, and Korea.
+
+### Conclusions
+
+A few things one should keep in mind in order not to take this analysis too seriously:
+
+- it's just a fit, an attempt to overlay a very simple curve over a humongously complex system like healthcare,
+- although life expectancy is an important measure of the overall quality of a country healthcare, other measures exist
+  that are also important to the patient,
+- PPP (purchase power parity) tries to capture the different level of costs in two different countries by comparing the cost
+  of a basket of goods, but it clearly has limitations,
+- it's just a fit.
+
+
+Header photo by [Barry Thomas](https://flic.kr/p/e8j6WN) with modifications.

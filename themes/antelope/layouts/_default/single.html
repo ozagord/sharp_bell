@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+{{ partial "header.html" . }}
+<body>
+    {{ partial "nav.html" . }}
+    <!--div class="article-meta">
+    <h1><span class="title">{{ .Title }}</span></h1>
+    {{ with .Params.author }}<h2 class="author">{{ . }}</h2>{{ end }}
+    {{ if .Params.date }}<h2 class="date">{{ .Date.Format "02 Feb. 2006" }}</h2>{{ end }}
+</div-->
+
+{{ if .Params.headerimg }}
+<header class="intro-header" style="background-image: url('{{ .Params.headerimg }}')">
+{{ else }}
+<header class="intro-header" style="background-image: url('/img/header_gsl2.jpg')">
+{{ end }}
+    <div class="article-meta">
+        <div class="row justify-content-md-center">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1><span class="title">{{ .Title }}</span></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="container">
+        <article>
+            <div class="row justify-content-md-center">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    {{ with .Params.author }}<h2 class="author"><small class="text-muted">Posted by {{ . }}</small></h2>{{ end }}
+                    {{ if .Params.date }}<h2 class="date"><small class="text-muted">{{ .Date.Format "January 2, 2006"}}</small></h2>{{ end }}
+
+                    {{ .Content }}
+
+                    <hr>
+                </div>
+            </div>
+        </article>
+    </div>
+</main>
+
+{{ partial "footer.html" . }}
+{{ partial "script.html" . }}
+
+</body>
+</html>

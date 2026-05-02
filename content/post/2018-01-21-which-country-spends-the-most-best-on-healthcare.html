@@ -1,0 +1,58 @@
+---
+title: Which country spends best on healthcare?
+author: Osvaldo
+date: '2018-01-21'
+headerimg: "/img/surfers_light_blur.jpg"
+slug: which-country-spends-best-on-healthcare
+categories:
+  - data
+tags:
+  - OECD
+  - country statistics
+  - healthcare
+---
+
+<script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="/rmarkdown-libs/pymjs/pym.v1.js"></script>
+<script src="/rmarkdown-libs/widgetframe-binding/widgetframe.js"></script>
+
+
+<p>In its publication <a href="http://dx.doi.org/10.1787/health_glance-2017-en">Health at a Glance 2017</a>, the most famous
+rich countries think-tank (OECD) presents a trove of data
+on health status and health system performance from many countries. Here below I report a small analysis I did looking at
+life expectancy and health spending per capita. The analysis below is performed on data available <a href="http://www.oecd-ilibrary.org/social-issues-migration-health/health-at-a-glance-2017/life-expectancy-at-birth-and-health-spending-per-capita-2015-or-nearest-year_health_glance-2017-graph8-en">here</a>, including the 35 OECD members plus some non-members like India, Indonesia, China, Costa Rica, Russia and others.</p>
+<div id="htmlwidget-1" style="width:100%;height:480px;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"url":"/post/2018-01-21-which-country-spends-the-most-best-on-healthcare_files/figure-html//widgets/widget_all_observed.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+<p>USA are known to spend the most amont the OECD countries. Nevertheless, despite spending 9507 USD per capita, their life
+expectancy is not in the top-tier and achieves 78.8 years. Further, it has been going down since a couple of years as
+a conseguence of the <a href="https://www.theguardian.com/us-news/2017/dec/21/us-life-expectancy-down-for-second-year-in-a-row-amid-opioid-crisis">opioid crisis</a>. Another outlier is South Africa, whose spending is in the low range of the pack, but achieves
+the lowest life expectancy in the countries considered (among other factors, HIV prevalence among adults in
+South Africa is around 19%).</p>
+<p>Except for these notable outliers, there seems to be a clear correlation between spending and life expectancy, with the latter
+increasing until 3000-4000 dollars and then flattening at around 83 years. Something that could be captured with a reasonable
+goodness-of-fit by an exponential response as in the next plot (USA and South Africa have been removed).</p>
+<div id="htmlwidget-2" style="width:100%;height:480px;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2">{"x":{"url":"/post/2018-01-21-which-country-spends-the-most-best-on-healthcare_files/figure-html//widgets/widget_predicted.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+<p>This brings us to the final plot, which shows the over- and under-performers: which country, given its spending, achieves
+life expectancy above and below the <em>predicted</em> one?</p>
+<div id="htmlwidget-3" style="width:100%;height:480px;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3">{"x":{"url":"/post/2018-01-21-which-country-spends-the-most-best-on-healthcare_files/figure-html//widgets/widget_residuals.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+<p>In this special ranking, the worst performers are Russia, Lithuania, Hungary, Slovakia, and Latvia; with spendings between 1351
+and 2059 USD, they fare between 2 and five years worse than predicted. Interestingly, they are trailed by Germany, Denmark,
+and Belgium; with spendings between 4778 and 5353 USD, they are 1-1.5 years below predictions.
+Turkey, China, and Costa Rica, although occupying the low-spending positions and, at the same time, not featuring the highest
+life expectancy, do much better than the prediction and are the winners in this special ranking. A group of countries with the
+highest life expectancy and with moderate spending is represented by Japan (the highest life expectancy overall), Spain, Italy, Israel, and Korea.</p>
+<div id="conclusions" class="section level3">
+<h3>Conclusions</h3>
+<p>A few things one should keep in mind in order not to take this analysis too seriously:</p>
+<ul>
+<li>it’s just a fit, an attempt to overlay a very simple curve over a humongously complex system like healthcare,</li>
+<li>although life expectancy is an important measure of the overall quality of a country healthcare, other measures exist
+that are also important to the patient,</li>
+<li>PPP (purchase power parity) tries to capture the different level of costs in two different countries by comparing the cost
+of a basket of goods, but it clearly has limitations,</li>
+<li>it’s just a fit.</li>
+</ul>
+<p>Header photo by <a href="https://flic.kr/p/e8j6WN">Barry Thomas</a> with modifications.</p>
+</div>

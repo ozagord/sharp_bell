@@ -1,0 +1,13 @@
+.navbar {
+  font-family: 'Montserrat', sans-serif;
+}
+
+pre code {
+  font-family: 'Source Code Pro', monospace;
+  font-size: 75%;
+}
+
+code {
+  font-family: 'Source Code Pro', monospace;
+  font-size: 75%;
+}

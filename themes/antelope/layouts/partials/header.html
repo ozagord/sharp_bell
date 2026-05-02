@@ -1,0 +1,37 @@
+<head>
+{{ with .Site.Params.googleAnalytics }}
+<script async src="https://www.googletagmanager.com/gtag/js?id={{.}}"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '{{.}}');
+</script>
+{{ end }}
+<meta charset="utf-8">
+<title>{{ .Title }}</title>
+
+<meta name="twitter:card" content="summary" />
+{{ with .Site.Params.twitter }}
+<meta name="twitter:creator" content="{{.}}" />
+{{ end }}
+<meta property="og:title" content="{{ .Title }}" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="{{$.Site.BaseURL}}{{ $.URL }}" />
+{{ if .Params.headerimg }}
+<meta property="og:image" content="{{ $.Site.BaseURL }}{{ .Params.headerimg }}" />
+{{ else }}
+<meta property="og:image" content="{{ $.Site.BaseURL }}/img/header_gsl2.jpg" />
+{{ end }}
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="{{ $.Param "description" }}">
+{{ if .RSSLink }}
+<link href="{{ .RSSLink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
+<link href="{{ .RSSLink }}" rel="feed" type="application/rss+xml" title="{{ .Site.Title }}" />
+{{ end }}
+<!--link href="{{ .Site.BaseURL }}css/bootstrap.css" rel="stylesheet">
+<link href="{{ .Site.BaseURL }}css/antelope.css" rel="stylesheet">
+<link href="{{ .Site.BaseURL }}css/fonts.css" rel="stylesheet"-->
+{{ partial "head_custom.html" . }}
+</head>

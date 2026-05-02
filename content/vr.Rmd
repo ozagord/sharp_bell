@@ -1,0 +1,10 @@
+---
+title: "Visual résumé"
+headerimg: "../img/header_na.jpg"
+published: false
+---
+
+```{r echo=FALSE}
+blogdown::shortcode('figure', src = '../img/vr.png', alt = 'A nice visualization',
+                    class = "figure-img img-fluid rounded")
+```
