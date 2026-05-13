@@ -1,0 +1,30 @@
+---
+// src/components/PlotlyChart.astro
+const { spec, chartId = "plotly-chart" } = Astro.props;
+---
+
+<div 
+  id={chartId} 
+  data-chart-spec={JSON.stringify(spec)} 
+  class="plotly-container"
+  style="width: 100%; height: 500px;"
+></div>
+
+<script>
+  import Plotly from 'plotly.js-dist-min';
+
+  const initCharts = () => {
+    document.querySelectorAll('.plotly-container').forEach(container => {
+      if (container.children.length > 0) return; 
+
+      // Recuperiamo l'intero oggetto spec
+      const spec = JSON.parse(container.getAttribute('data-chart-spec'));
+      
+      // Passiamo spec.data e spec.layout a Plotly
+      Plotly.newPlot(container, spec.data, spec.layout, { responsive: true });
+    });
+  };
+
+  document.addEventListener('astro:page-load', initCharts);
+  document.addEventListener('DOMContentLoaded', initCharts);
+</script>

@@ -1,0 +1,105 @@
+---
+title: Tertiary education in OECD countries
+author: Osvaldo
+date: '2017-12-19'
+headerimg: "/img/leaves.jpg"
+slug: tertiary-education-in-oecd-countries
+categories:
+  - data
+tags:
+  - dataviz
+  - country statistics
+  - OECD
+---
+
+import PlotlyChart from '../../components/PlotlyChart.astro';
+import tertiaryEducationData from '../../assets/tertiary_education.json';
+
+I've read on multiple occasions that the fraction of the population with a tertiary degree in Italy is
+much lower than in other countries. I've always wondered how much this can be explained with the fact
+that, until relatively recently, Italy only had **one** type of academic degree.
+
+As a consequence of
+the [Bologna process](http://ec.europa.eu/education/policy/higher-education/bologna-process_en),
+Italy reformed its academic degree system in 1999, introducing a three-year Bachelor's and
+a two-year Master's degree (_laurea triennale_ and _laurea specialistica_). Before then, a single
+degree called _laurea_, with programs ranging from four to six years, was offered. I remember when,
+during my Erasmus in France, I would describe this to French students. Their reaction: "But then,
+if you want to quit after three years, you will have wasted time because you don't have any degree!"
+
+Since the old _laurea_ is equivalent to the Master's degree, those born before, approximately, 1981,
+either have a Master or nothing.
+
+OECD makes available a table with the fraction of the population that
+has attained different levels of education (data from 2016). For tertiary education, this is split
+over Bachelor's, Master's, Short-cycle tertiary and Doctoral degrees. The numbers are shown in
+the plot below (Italy is between Finland and E22, the plot is zoomable).
+
+```r
+library(readr)
+library(dplyr)
+library(tidyr)
+library(plotly)
+library(widgetframe)
+
+cpalette <- c('#bdc9e1', '#74a9cf', '#2b8cbe', '#045a8d')
+all_data <- read.csv("tables/education_oecd.csv", sep = ",")
+edu <- all_data %>%
+  filter(ISC11A %in% c('L5', 'L6', 'L7', 'L8'),
+         Measure == 'Value',
+         Reference.year == 'Latest available year',
+         SEX == 'T') %>%
+  select(country_code, ISC11A, Value) %>%
+  group_by(country_code) %>%
+  spread(ISC11A, Value) %>%
+  mutate(L5 = ifelse(is.na(L5), 0.0, round(L5, 1))) %>%
+  mutate(L6 = ifelse(is.na(L6), 0.0, round(L6, 1))) %>%
+  mutate(L7 = ifelse(is.na(L7), 0.0, round(L7, 1))) %>%
+  mutate(L8 = ifelse(is.na(L8), 0.0, round(L8, 1))) %>%
+  arrange(desc(L7))
+edu$country_code <- factor(edu$country_code, levels = edu$country_code)
+
+p <- plot_ly(edu, x = ~country_code, y = ~L7, type = 'bar', name = "Master's",
+             marker = list(color = cpalette[4])) %>%
+  add_trace(y = ~L8, name = "Doctoral", marker = list(color = cpalette[3])) %>%
+  add_trace(y = ~L6, name = "Bachelor's", marker = list(color = cpalette[2])) %>%
+  add_trace(y = ~L5, name = "Short-cycle", marker = list(color = cpalette[1])) %>%
+  layout(xaxis = list(title = '', tickangle = -90)) %>%
+  layout(yaxis = list(title = 'percentage of population aged 25-64 (2016)'), barmode = 'stack')
+frameWidget(p)
+```
+
+<PlotlyChart spec={tertiaryEducationData} chartId="tertiary_education-plot" />
+
+The fraction of the population with a Master's degree or equivalent in Italy is 13.7 %, exactly
+equivalent to the E22 average and slightly higher than the OECD average (11.9%). Only 3.6% have a
+Bachelor's, though, while the EU22 average is 13.2 %.
+
+If we want to see the prevalence of tertiary degrees by age group, data are not split anymore by
+different types of degrees (at least, I haven't found the data) and we only have a
+"tertiary education" indicator, displayed in the plot below.
+
+```r
+library(plotly)
+library(widgetframe)
+
+age_groups <- c("55-64", "45-54", "35-44", "25-34")
+Italy <- c(12.4, 14.0, 20.5, 25.6)
+OECD <- c(26.5, 32.1, 40.5, 43.1)
+data <- data.frame(age_groups, Italy, OECD)
+xaxis <- list(title = "age group")
+p <- plot_ly(data, x = ~age_groups, y = ~Italy, type = 'bar', name = 'Italy',
+             marker = list(color = '#bdc9e1')) %>%
+  add_trace(y = ~OECD, name = 'OECD', marker = list(color = '#74a9cf')) %>%
+  layout(xaxis = list(title = '')) %>%
+  layout(yaxis = list(title = 'percentage in same age group (2016)'), barmode = 'group') %>%
+layout(title = "Tertiary education by age group")
+frameWidget(p)
+```
+
+Although the younger generations have doubled the earlier ones in achieving tertiary eduaction (but,
+remember, older ones could not choose to stop after a Bachelor), there is still a wide gap compared
+to OECD average.
+
+
+Photo by Chris Petrow on Unsplash.

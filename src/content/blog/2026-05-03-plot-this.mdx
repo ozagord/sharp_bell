@@ -1,0 +1,21 @@
+---
+title: Plot this
+author: Osvaldo
+date: '2026-05-03'
+headerimg: "/img/iceberg.jpg"
+slug: plot-this
+categories:
+  - data
+  - plot
+tags:
+  - dataviz
+---
+
+import PlotlyChart from '../../components/PlotlyChart.astro';
+import tertiaryEducationData from '../../assets/tertiary_education.json';
+
+# Risultati della Ricerca
+
+Ecco il grafico generato originariamente nel mio notebook e ora integrato nativamente:
+
+<PlotlyChart spec={tertiaryEducationData} chartId="tertiary_education-plot" />
