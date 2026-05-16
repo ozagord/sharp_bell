@@ -16,7 +16,7 @@ cpalette = ['#bdc9e1', '#74a9cf', '#2b8cbe', '#045a8d']
 # Filtering and selecting
 edu = (
     # 1. Load Data
-    pd.read_csv("/private/tmp/education_oecd.csv")
+    pd.read_csv("src/assets/education_oecd.csv")
     # 2. Data Wrangling (The dplyr/tidyr equivalent)
     .query("ISC11A in ['L5', 'L6', 'L7', 'L8']")
     .query("Measure == 'Value'")
@@ -77,6 +77,8 @@ fig.add_trace(go.Bar(
 # Set layout for stacked bar chart
 fig.update_layout(
     barmode='stack',
+    paper_bgcolor='rgba(0,0,0,0)',
+    plot_bgcolor='rgba(0,0,0,0)',
     xaxis={'type': 'category'} # Ensures order matches the sorted dataframe
 )
 
@@ -87,5 +89,5 @@ chart_dict = {
     "layout": fig.to_dict()["layout"]
 }
 
-output_path = "../assets/tertiary_education.json"
+output_path = "src/assets/tertiary_education.json"
 pio.write_json(fig, output_path)
