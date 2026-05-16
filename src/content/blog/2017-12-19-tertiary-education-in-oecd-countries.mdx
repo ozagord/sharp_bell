@@ -14,6 +14,7 @@ tags:
 
 import PlotlyChart from '../../components/PlotlyChart.astro';
 import tertiaryEducationData from '../../assets/tertiary_education.json';
+import italyEducationData from '../../assets/italy_data_by_age_group.json';
 
 I've read on multiple occasions that the fraction of the population with a tertiary degree in Italy is
 much lower than in other countries. I've always wondered how much this can be explained with the fact
@@ -79,6 +80,7 @@ If we want to see the prevalence of tertiary degrees by age group, data are not 
 different types of degrees (at least, I haven't found the data) and we only have a
 "tertiary education" indicator, displayed in the plot below.
 
+
 ```r
 library(plotly)
 library(widgetframe)
@@ -96,6 +98,8 @@ p <- plot_ly(data, x = ~age_groups, y = ~Italy, type = 'bar', name = 'Italy',
 layout(title = "Tertiary education by age group")
 frameWidget(p)
 ```
+
+<PlotlyChart spec={italyEducationData} chartId="italy_by_age-plot" />
 
 Although the younger generations have doubled the earlier ones in achieving tertiary eduaction (but,
 remember, older ones could not choose to stop after a Bachelor), there is still a wide gap compared

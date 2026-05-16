@@ -19,7 +19,9 @@ const { spec, chartId = "plotly-chart" } = Astro.props;
 
       // Recuperiamo l'intero oggetto spec
       const spec = JSON.parse(container.getAttribute('data-chart-spec'));
-      
+      console.log('Data being sent to Plotly:', spec.data);
+      console.log('Layout being sent to Plotly:', spec.layout);
+
       // Passiamo spec.data e spec.layout a Plotly
       Plotly.newPlot(container, spec.data, spec.layout, { responsive: true });
     });
