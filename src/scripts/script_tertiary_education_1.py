@@ -87,5 +87,5 @@ chart_dict = {
     "layout": fig.to_dict()["layout"]
 }
 
-output_path = "/Users/ozagordi/Projects/vaults/sharp_bell/src/assets/tertiary_education.json"
+output_path = "../assets/tertiary_education.json"
 pio.write_json(fig, output_path)

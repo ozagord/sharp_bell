@@ -1,0 +1,104 @@
+---
+import { Code } from 'astro:components';
+import fs from 'node:fs';
+import path from 'node:path';
+
+interface Props {
+  filePath: string;  // Relative to the project root, e.g., 'src/snippets/demo.js'
+  lang?: string;      // Programming language for syntax highlighting
+  buttonText?: string; // Initial button text
+}
+
+const { filePath, lang = 'javascript', buttonText = 'Show Code' } = Astro.props;
+
+// Read the external file at build time
+let fileContent = '';
+try {
+  const absolutePath = path.resolve(filePath);
+  fileContent = fs.readFileSync(absolutePath, 'utf-8');
+} catch (error) {
+  fileContent = `Error loading file: ${filePath}`;
+  console.error(error);
+}
+---
+
+<div class="code-toggle-wrapper">
+  <button 
+    class="toggle-button" 
+    data-show-text={buttonText} 
+    data-hide-text="Hide Code"
+  >
+    {buttonText}
+  </button>
+  
+  <div class="code-content is-hidden">
+    <Code code={fileContent} lang={lang} theme="github-dark" />
+  </div>
+</div>
+
+<script>
+  // This script runs entirely in the browser
+  function setupToggles() {
+    const wrappers = document.querySelectorAll('.code-toggle-wrapper');
+
+    wrappers.forEach((wrapper) => {
+      const button = wrapper.querySelector('.toggle-button') as HTMLButtonElement;
+      const content = wrapper.querySelector('.code-content');
+
+      if (!button || !content) return;
+
+      // Clean up any old listeners if this runs multiple times (e.g., during view transitions)
+      button.replaceWith(button.cloneNode(true));
+      const newButton = wrapper.querySelector('.toggle-button') as HTMLButtonElement;
+
+      newButton.addEventListener('click', () => {
+        const isHidden = content.classList.toggle('is-hidden');
+        
+        // Update button text based on state
+        const showText = newButton.getAttribute('data-show-text') || 'Show Code';
+        const hideText = newButton.getAttribute('data-hide-text') || 'Hide Code';
+        newButton.textContent = isHidden ? showText : hideText;
+      });
+    });
+  }
+
+  // Run on initial load
+  setupToggles();
+
+  // Optional: If you use Astro's View Transitions, re-run setup after a page change
+  document.addEventListener('astro:after-swap', setupToggles);
+</script>
+
+<style>
+  .code-toggle-wrapper {
+    margin: 1.5rem 0;
+  }
+
+  .toggle-button {
+    background-color: #23262d;
+    color: #fff;
+    border: 1px solid #343841;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
+  }
+
+  .toggle-button:hover {
+    background-color: #2b303a;
+  }
+
+  .code-content {
+    margin-top: 0.75rem;
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.2s ease-in-out;
+  }
+
+  /* Accessible hiding method instead of display:none for better transitions if needed, 
+     but standard display:none is perfectly fine for basic functionality */
+  .code-content.is-hidden {
+    display: none;
+  }
+</style>

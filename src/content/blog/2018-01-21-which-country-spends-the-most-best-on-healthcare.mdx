@@ -12,31 +12,21 @@ tags:
   - healthcare
 ---
 
+import CodeToggle from '../../components/CodeToggle.astro'
+import PlotlyChart from '../../components/PlotlyChart.astro';
+import healthcareData from '../../assets/healthcare_spending.json';
+import healthcareData2 from '../../assets/healthcare_spending_2.json';
+
 In its publication [Health at a Glance 2017](http://dx.doi.org/10.1787/health_glance-2017-en), the most famous
 rich countries think-tank (OECD) presents a trove of data
 on health status and health system performance from many countries. Here below I report a small analysis I did looking at
-life expectancy and health spending per capita. The analysis below is performed on data available [here](http://www.oecd-ilibrary.org/social-issues-migration-health/health-at-a-glance-2017/life-expectancy-at-birth-and-health-spending-per-capita-2015-or-nearest-year_health_glance-2017-graph8-en), including the 35 OECD members plus some non-members like India, Indonesia, China, Costa Rica, Russia and others.
+life expectancy and health spending per capita. The analysis below is performed on data available
+[here](http://www.oecd-ilibrary.org/social-issues-migration-health/health-at-a-glance-2017/life-expectancy-at-birth-and-health-spending-per-capita-2015-or-nearest-year_health_glance-2017-graph8-en),
+including the 35 OECD members plus some non-members like India, Indonesia, China, Costa Rica, Russia and others.
 
-```r
-library(readr)
-library(dplyr)
-library(ggplot2)
-library(plotly)
-library(widgetframe)
-life_exp_spending <- read_csv("life_exp_spending.csv") %>%
-  arrange(health_spending_USD_ppp)
-# kable(life_exp_spending, caption = 'Health spending and life expectancy at birth, 2015 (or nearest year)')
+<PlotlyChart spec={healthcareData} chartId="healthcare-plot" />
 
-p <- plot_ly(life_exp_spending, x = ~health_spending_USD_ppp, y = ~life_expectancy, type = 'scatter',
-        mode = 'markers', text = ~country) %>%
-        # textposition = 'middle right', textfont = list(color = '#000000', size = 16)) %>%
-  layout(title = 'Health spending per capita and life expectancy at birth, 2015 (or nearest year)',
-         xaxis = list(title = 'Health spending per capita (USD at PPP)',
-                      zeroline = FALSE),
-         yaxis = list(title = 'Life expectancy at birth (years)'))
-
-frameWidget(p)
-```
+<CodeToggle filePath="src/scripts/script_healthcare_spending.py" lang="python" buttonText="Show code to recreate plot" />
 
 USA are known to spend the most amont the OECD countries. Nevertheless, despite spending 9507 USD per capita, their life
 expectancy is not in the top-tier and achieves 78.8 years. Further, it has been going down since a couple of years as
@@ -48,32 +38,9 @@ Except for these notable outliers, there seems to be a clear correlation between
 increasing until 3000-4000 dollars and then flattening at around 83 years. Something that could be captured with a reasonable
 goodness-of-fit by an exponential response as in the next plot (USA and South Africa have been removed).
 
-```r
-life_exp_spending <- life_exp_spending %>%
-  filter(!(country_code %in% c('USA', 'ZAF')))
+<PlotlyChart spec={healthcareData2} chartId="healthcare-plot-2" />
 
-fit <- nls(life_expectancy ~ le_max * (1 - exp(a - b * health_spending_USD_ppp)),
-           data = life_exp_spending,
-           start = list(le_max = 80, a = 10, b = 0.001))
-# summary(fit)
-# plot(life_exp_spending$health_spending_USD_ppp, life_exp_spending$life_expectancy)
-# lines(life_exp_spending$health_spending_USD_ppp, predict(fit))
-life_exp_spending$fit <- predict(fit)
-life_exp_spending$residuals <- round(residuals(fit), 1)
-
-p <- plot_ly(life_exp_spending, x = ~health_spending_USD_ppp, y = ~life_expectancy, type = 'scatter',
-             mode = 'markers', text = ~country, name = 'observed') %>%
-  add_trace(y = ~fit, name = 'predicted', mode = 'lines') %>%
-  layout(title = 'Health spending per capita and life expectancy at birth, 2015 (or nearest year)',
-         xaxis = list(title = 'Health spending per capita (USD at PPP)',
-                      zeroline = FALSE),
-         yaxis = list(title = 'Life expectancy at birth (years)'))
-
-
-# life_exp_spending <- life_exp_spending %>%
-#   arrange(desc(residuals))
-frameWidget(p)
-```
+<CodeToggle filePath="src/scripts/script_healthcare_spending_2.py" lang="python" buttonText="Show code to recreate plot" />
 
 This brings us to the final plot, which shows the over- and under-performers: which country, given its spending, achieves
 life expectancy above and below the _predicted_ one?
