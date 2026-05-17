@@ -16,6 +16,7 @@ import CodeToggle from '../../components/CodeToggle.astro'
 import PlotlyChart from '../../components/PlotlyChart.astro';
 import healthcareData from '../../assets/healthcare_spending.json';
 import healthcareData2 from '../../assets/healthcare_spending_2.json';
+import healthcareData3 from '../../assets/healthcare_spending_3.json';
 
 In its publication [Health at a Glance 2017](http://dx.doi.org/10.1787/health_glance-2017-en), the most famous
 rich countries think-tank (OECD) presents a trove of data
@@ -45,18 +46,7 @@ goodness-of-fit by an exponential response as in the next plot (USA and South Af
 This brings us to the final plot, which shows the over- and under-performers: which country, given its spending, achieves
 life expectancy above and below the _predicted_ one?
 
-```r
-
-life_exp_spending <- life_exp_spending %>%
-  arrange(desc(residuals))
-life_exp_spending$country_code <- factor(life_exp_spending$country_code, levels = life_exp_spending$country_code)
-p <- plot_ly(life_exp_spending, x = ~country_code, y = ~residuals, type="bar", text=life_exp_spending$country) %>%
-    layout(title = 'Residual (observed - predicted) life expectancy',
-         xaxis = list(title=''),
-         yaxis = list(title = 'Excess life expectancy (years)'))
-
-frameWidget(p)
-```
+<PlotlyChart spec={healthcareData3} chartId="healthcare-plot-3" />
 
 In this special ranking, the worst performers are Russia, Lithuania, Hungary, Slovakia, and Latvia; with spendings between 1351
 and 2059 USD, they fare between 2 and five years worse than predicted. Interestingly, they are trailed by Germany, Denmark,

@@ -76,8 +76,37 @@ fig.update_layout(
     title="Health spending per capita and life expectancy at birth, 2015 (or nearest year)",
     xaxis=dict(title="Health spending per capita (USD at PPP)", zeroline=False),
     yaxis=dict(title="Life expectancy at birth (years)"),
+    paper_bgcolor='rgba(0,0,0,0)',
+    plot_bgcolor='rgba(0,0,0,0)',
 )
-
 
 output_path = "src/assets/healthcare_spending_2.json"
 pio.write_json(fig, output_path)
+
+# Sort the DataFrame
+life_exp_spending = life_exp_spending.sort_values(
+    by="residuals", ascending=False
+)
+
+# Build the plot
+fig3 = go.Figure(
+    data=[
+        go.Bar(
+            x=life_exp_spending["country_code"],
+            y=life_exp_spending["residuals"],
+            text=life_exp_spending["country"],
+            hoverinfo="text+y",  # Shows country name and y-value on hover
+        )
+    ]
+)
+
+# Apply layout
+fig3.update_layout(
+    title="Residual (observed - predicted) life expectancy",
+    xaxis=dict(title="", type="category"),  # type='category' preserves the sort order
+    yaxis=dict(title="Excess life expectancy (years)"),
+    paper_bgcolor='rgba(0,0,0,0)',
+    plot_bgcolor='rgba(0,0,0,0)',
+)
+output_path = "src/assets/healthcare_spending_3.json"
+pio.write_json(fig3, output_path)

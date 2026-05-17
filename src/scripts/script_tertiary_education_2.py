@@ -41,6 +41,8 @@ fig.add_trace(
 # 4. Configurazione del Layout (Titoli, Assi e Barmode)
 fig.update_layout(
     title="Tertiary education by age group",
+    paper_bgcolor='rgba(0,0,0,0)',
+    plot_bgcolor='rgba(0,0,0,0)',
     xaxis=dict(title=''),  # Rimosso il titolo come nel tuo script R originale
     yaxis=dict(title='percentage in same age group (2016)'),
     barmode='group'        # Barre affiancate raggruppate

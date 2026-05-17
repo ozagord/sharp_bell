@@ -32,6 +32,8 @@ fig = px.scatter(
 fig.update_layout(
     xaxis=dict(title="Health spending per capita (USD at PPP)", zeroline=False),
     yaxis=dict(title="Life expectancy at birth (years)"),
+    paper_bgcolor='rgba(0,0,0,0)',
+    plot_bgcolor='rgba(0,0,0,0)'
 )
 
 output_path = "src/assets/healthcare_spending.json"
