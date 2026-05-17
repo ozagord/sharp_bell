@@ -1,5 +1,5 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
 
 const title = "About";
 const description = "This is how I came here.";
@@ -7,7 +7,10 @@ const image = "/img/header_na.jpg";
 ---
 
 <BaseLayout title={title} description={description} image={image}>
-  <div class="hero-image" style={`background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${image}')`}>
+  <div
+    class="hero-image"
+    style={`background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${image}')`}
+  >
     <div class="container hero-content animate-fade-in">
       <h1 class="page-title">{title}</h1>
       <p class="subheading">{description}</p>
@@ -16,11 +19,30 @@ const image = "/img/header_na.jpg";
 
   <div class="container page-container">
     <div class="post-content">
-      <p>I studied physics, both master and PhD. Then I took a postdoc position at ETH Zurich to work on the analysis of large datasets of DNA sequences. I keep analysing DNA sequences for diagnostic purposes at the University of Zurich.</p>
-      
-      <p>In 2014, with a few colleagues, I founded <a href="http://www.engene.ch">enGene Statistics</a>, a company offering consulting in data analytics, with a focus on bioinformatics/genomics.</p>
-      
-      <p>Here I blog about data and data science in general.</p>
+      <p>
+        I studied physics, both master and PhD. Then I took a postdoc position
+        at ETH Zurich to work on the analysis of large datasets of DNA
+        sequences. Afterwards, I moved to the University of Zurich: still
+        analysing DNA sequences, but for diagnostic purposes.
+      </p>
+
+      <p>
+        In 2014, with a few colleagues, I founded <a href="http://www.engene.ch"
+          >enGene Statistics</a
+        >, a company offering consulting in data analytics, with a focus on
+        bioinformatics/genomics.
+      </p>
+
+      <p>
+        In 2018 I moved back to Italy where, after a brief stint in another
+        startup, I was hired by a Telco company where I am still working as
+        senior data scientist.
+      </p>
+
+      <p>
+        Here I blog about <s>science</s>, <s>data</s>, <s>data science</s> stuff
+        in general.
+      </p>
     </div>
   </div>
 </BaseLayout>
@@ -47,7 +69,7 @@ const image = "/img/header_na.jpg";
     font-size: 3.5rem;
     margin-bottom: 0.5rem;
     margin-top: 0;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
   }
 
   .subheading {
