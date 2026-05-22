@@ -1,4 +1,5 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
 import { glob } from 'astro/loaders';
 
 const blogCollection = defineCollection({
@@ -7,6 +8,7 @@ const blogCollection = defineCollection({
     title: z.string(),
     author: z.string().optional(),
     categories: z.array(z.string()).optional(),
+    description: z.string().default(''),
     tags: z.array(z.string()).optional(),
     date: z.date().or(z.string().transform((str) => new Date(str))),
     coverImage: z.string().optional(),
@@ -14,6 +16,7 @@ const blogCollection = defineCollection({
     coverMeta: z.string().optional(),
     thumbnailImage: z.string().optional(),
     thumbnailImagePosition: z.string().optional(),
+    featured: z.boolean().default(false),
   })
 });
 

@@ -1,0 +1,30 @@
+---
+title: Healthcare spending and life expectancy, 2026 update
+author: Osvaldo
+date: '2026-05-22'
+description: Which country, given its spending, achieves life expectancy above and below the _predicted_ one? 2026 update
+headerimg: img/surfers_light_blur.jpg"
+slug: update-health-care-spending
+categories:
+  - data
+tags:
+  - OECD
+  - country statistics
+  - healthcare
+featured: true
+---
+
+import CodeToggle from '../../components/CodeToggle.astro'
+import PlotlyChart from '../../components/PlotlyChart.astro';
+import healthcareData from '../../assets/healthcare_spending_2026_1.json';
+
+One of the [last blog posts here](../post/which-country-spends-best-on-healthcare)
+was an analysis aimed at estimating under- and over-achievers when it comes to healthcare spending. Eight years on, how has the situation evolved?
+
+
+<PlotlyChart spec={healthcareData} chartId="healthcare-plot" />
+
+<CodeToggle filePath="src/scripts/healthcare_spending_2026_1.py" lang="python" buttonText="Show code to recreate plot" />
+
+
+Header photo by [Barry Thomas](https://flic.kr/p/e8j6WN) with modifications.
