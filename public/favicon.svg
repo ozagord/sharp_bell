@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Premium Gradient: Neon Cyan to Hot Pink -->
+    <linearGradient id="option3Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4" />
+      <stop offset="50%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#ec4899" />
+    </linearGradient>
+  </defs>
+  <style>
+    .bg {
+      fill: none;
+    }
+    .bell-wing-left {
+      fill: url(#option3Grad);
+      opacity: 0.95;
+    }
+    .bell-wing-right {
+      fill: url(#option3Grad);
+      opacity: 0.85; /* Slightly different opacity to create depth/3D effect */
+    }
+    .bell-diamond-clapper {
+      fill: url(#option3Grad);
+    }
+    .bell-spine {
+      stroke: url(#option3Grad);
+      stroke-width: 8;
+      stroke-linecap: round;
+      opacity: 0.4;
+    }
+    .bell-base-curve {
+      fill: none;
+      stroke: url(#option3Grad);
+      stroke-width: 16;
+      stroke-linecap: round;
+      opacity: 0.7;
+    }
+  </style>
+  
+  <!-- Transparent Background -->
+  <rect class="bg" width="512" height="512" />
+
+  <g transform="translate(0, 15)">
+    <!-- Central Spinal Rod -->
+    <line class="bell-spine" x1="256" y1="80" x2="256" y2="350" />
+
+    <!-- Left Wing (Sleek aerodynamic bezier shape representing the left Gaussian half) -->
+    <path class="bell-wing-left" d="M 90,360 C 150,360 185,320 205,230 C 220,160 240,100 256,70 C 256,70 235,160 210,250 C 190,310 150,335 90,360 Z" />
+
+    <!-- Right Wing (Perfect mirror image of the left wing, overlapping slightly at the peak) -->
+    <path class="bell-wing-right" d="M 422,360 C 362,360 327,320 307,230 C 292,160 272,100 256,70 C 256,70 277,160 302,250 C 322,310 362,335 422,360 Z" />
+
+    <!-- Sleek, Minimalist Bottom Accent Curve (floating rim) -->
+    <path class="bell-base-curve" d="M 120,375 Q 256,400 392,375" />
+
+    <!-- Sharp Diamond Clapper (45-degree rotated square representing the sharp concept) -->
+    <path class="bell-diamond-clapper" d="M 256,355 L 285,385 L 256,415 L 227,385 Z" />
+  </g>
+</svg>

@@ -2,7 +2,9 @@
 ---
 <header class="site-header">
   <div class="container header-container">
-    <a href="/" class="logo">Sharp Bell</a>
+    <a href="/" class="logo" aria-label="Sharp Bell Home">
+      <img src="/favicon_option3.svg" alt="Sharp Bell Logo" style="height: 2.75rem; width: auto; display: block;" />
+    </a>
     
     <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
       <span class="bar"></span>
@@ -32,7 +34,7 @@
 <style>
   .site-header {
     background-color: var(--bg-alt);
-    padding: 1.5rem 0;
+    padding: 0.25rem 0;
     box-shadow: var(--shadow-sm);
     position: sticky;
     top: 0;
@@ -47,11 +49,8 @@
   }
 
   .logo {
-    font-family: var(--font-ui);
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: var(--heading-color);
-    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
     z-index: 102; /* Above the nav when expanded */
     position: relative;
   }
@@ -60,7 +59,6 @@
     color: var(--accent-color);
   }
 
-  /* Hamburger Menu Button */
   .hamburger {
     display: flex;
     flex-direction: column;
