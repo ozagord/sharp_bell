@@ -1,28 +1,84 @@
 ---
+
 ---
+
 <header class="site-header">
   <div class="container header-container">
     <a href="/" class="logo" aria-label="Sharp Bell Home">
-      <img src="/favicon_option3.svg" alt="Sharp Bell Logo" style="height: 2.75rem; width: auto; display: block;" />
+      <img
+        src="/favicon.svg"
+        alt="Sharp Bell Logo"
+        style="height: 2.75rem; width: auto; display: block;"
+      />
     </a>
-    
+
     <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
       <span class="bar"></span>
       <span class="bar"></span>
       <span class="bar"></span>
     </button>
-    
+
     <nav class="main-nav">
       <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/about">About</a></li>
         <li><a href="/tags">Tags</a></li>
         <li>
-          <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+          <button
+            id="theme-toggle"
+            class="theme-toggle"
+            aria-label="Toggle dark mode"
+          >
             <!-- Sun icon (shows in dark mode) -->
-            <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+            <svg
+              class="sun-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              ><circle cx="12" cy="12" r="5"></circle><line
+                x1="12"
+                y1="1"
+                x2="12"
+                y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line
+                x1="4.22"
+                y1="4.22"
+                x2="5.64"
+                y2="5.64"></line><line
+                x1="18.36"
+                y1="18.36"
+                x2="19.78"
+                y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"
+              ></line><line x1="21" y1="12" x2="23" y2="12"></line><line
+                x1="4.22"
+                y1="19.78"
+                x2="5.64"
+                y2="18.36"></line><line
+                x1="18.36"
+                y1="5.64"
+                x2="19.78"
+                y2="4.22"></line></svg
+            >
             <!-- Moon icon (shows in light mode) -->
-            <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            <svg
+              class="moon-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              ><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
+              ></path></svg
+            >
             <span class="theme-text">Dark Mode</span>
           </button>
         </li>
@@ -170,42 +226,42 @@
 
 <script>
   // Use 'astro:page-load' event to make sure it works after Astro view transitions (if used)
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener("DOMContentLoaded", () => {
     setupMenu();
     setupTheme();
   });
-  
+
   // also run on normal load just in case
   setupMenu();
   setupTheme();
 
   function setupMenu() {
-    const hamburger = document.querySelector('.hamburger');
-    const nav = document.querySelector('.main-nav');
+    const hamburger = document.querySelector(".hamburger");
+    const nav = document.querySelector(".main-nav");
 
-    if (hamburger && nav && !hamburger.hasAttribute('data-initialized')) {
-      hamburger.addEventListener('click', () => {
-        const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
-        hamburger.setAttribute('aria-expanded', String(!isExpanded));
-        nav.classList.toggle('open');
+    if (hamburger && nav && !hamburger.hasAttribute("data-initialized")) {
+      hamburger.addEventListener("click", () => {
+        const isExpanded = hamburger.getAttribute("aria-expanded") === "true";
+        hamburger.setAttribute("aria-expanded", String(!isExpanded));
+        nav.classList.toggle("open");
       });
-      hamburger.setAttribute('data-initialized', 'true');
+      hamburger.setAttribute("data-initialized", "true");
     }
   }
 
   function setupTheme() {
-    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggle = document.getElementById("theme-toggle");
 
-    if (themeToggle && !themeToggle.hasAttribute('data-initialized')) {
-      themeToggle.addEventListener('click', () => {
+    if (themeToggle && !themeToggle.hasAttribute("data-initialized")) {
+      themeToggle.addEventListener("click", () => {
         const element = document.documentElement;
-        const isDark = element.getAttribute('data-theme') === 'dark';
-        const newTheme = isDark ? 'light' : 'dark';
-        
-        element.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
+        const isDark = element.getAttribute("data-theme") === "dark";
+        const newTheme = isDark ? "light" : "dark";
+
+        element.setAttribute("data-theme", newTheme);
+        localStorage.setItem("theme", newTheme);
       });
-      themeToggle.setAttribute('data-initialized', 'true');
+      themeToggle.setAttribute("data-initialized", "true");
     }
   }
 </script>
